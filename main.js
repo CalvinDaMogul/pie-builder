@@ -2,6 +2,8 @@ const addButton = document.getElementById('addButton');
 const inputIngredient = document.getElementById('inputIngredient');
 
 const ingredients = [];
+let ingredientCounter = 1;
+
 
 const printToDom = (divID, textToPrint) => {
     const selectedDiv = document.getElementById(divID);
@@ -16,7 +18,7 @@ const domStringBuilder = (arrayToPrint) => {
         domString += `<div class="card col-3">`
         domString += `<div class="card-body">`
         domString += `<h5 class="card-title">${ingredient.item}</h5>`
-        // domString += `<a href="#" class="btn btn-primary">Go somewhere</a>`
+        domString += `<a class="btn btn-danger deleteButton" id=${ingredient.id}>Delete</a>`
         domString += `</div>`
         domString += `</div>`
         
@@ -29,10 +31,11 @@ const addIngredient = (e) => {
     e.preventDefault();
     const inputText = inputIngredient.value;
     const newIngredient = {
-        item: inputText
+        item: inputText,
+        id: `ingredient${ingredientCounter}`,
     };
     ingredients.push(newIngredient);
-    console.log(inputText);
+    ingredientCounter++;
     domStringBuilder(ingredients);
     inputIngredient.value = '';
 };
